@@ -16,6 +16,18 @@ namespace MonoGame3_animation
         Rectangle tribbleGreyRect;
         Vector2 tribbleGreySpeed;
 
+        Texture2D tribbleBrownTexture;
+        Rectangle tribbleBrownRect;
+        Vector2 tribbleBrownSpeed;
+
+        Texture2D tribbleCreamTexture;
+        Rectangle tribbleCreamRect;
+        Vector2 tribbleCreamSpeed;
+
+        Texture2D tribbleOrangeTexture;
+        Rectangle tribbleOrangeRect;
+        Vector2 tribbleOrangeSpeed;
+
         SoundEffect tribbleCoo;
 
         public Game1()
@@ -31,14 +43,23 @@ namespace MonoGame3_animation
 
             this.Window.Title = "SQN";
 
+
             window = new Rectangle(0, 0, 800, 600);
             _graphics.PreferredBackBufferWidth = window.Width;
             _graphics.PreferredBackBufferHeight = window.Height;
             _graphics.ApplyChanges();
 
             tribbleGreyRect = new Rectangle(300, 10, 100, 100);
-
             tribbleGreySpeed = new Vector2(5, 5);
+
+            tribbleBrownRect = new Rectangle(10, 300, 100, 100);
+            tribbleBrownSpeed = new Vector2(10, 21);
+
+            tribbleCreamRect = new Rectangle(131, 200, 100, 100);
+            tribbleCreamSpeed = new Vector2(6, 4);
+
+            tribbleOrangeRect = new Rectangle(343, 452, 100, 100);
+            tribbleOrangeSpeed = new Vector2(3, 11);
 
             base.Initialize();
         }
@@ -48,6 +69,10 @@ namespace MonoGame3_animation
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             tribbleGreyTexture = Content.Load<Texture2D>("tribbleGrey");
+            tribbleBrownTexture = Content.Load<Texture2D>("tribbleBrown");
+            tribbleCreamTexture = Content.Load<Texture2D>("tribbleCream");
+            tribbleOrangeTexture = Content.Load<Texture2D>("tribbleOrange");
+
             tribbleCoo = Content.Load<SoundEffect>("tribble_coo");
 
             // TODO: use this.Content to load your game content here
@@ -74,6 +99,54 @@ namespace MonoGame3_animation
                 tribbleCoo.Play();
             }
 
+            // // // // // //
+
+            tribbleBrownRect.X += (int)tribbleBrownSpeed.X;
+            if (tribbleBrownRect.Right > window.Width || tribbleBrownRect.Left < 0)
+            {
+                tribbleBrownSpeed.X *= -1;
+                tribbleCoo.Play();
+            }
+
+            tribbleBrownRect.Y += (int)tribbleBrownSpeed.Y;
+            if (tribbleBrownRect.Bottom > window.Height || tribbleBrownRect.Top < 0)
+            {
+                tribbleBrownSpeed.Y *= -1;
+                tribbleCoo.Play();
+            }
+
+            // // // // // // 
+
+            tribbleCreamRect.X += (int)tribbleCreamSpeed.X;
+            if (tribbleCreamRect.Right > window.Width || tribbleCreamRect.Left < 0)
+            {
+                tribbleCreamSpeed.X *= -1;
+                tribbleCoo.Play();
+            }
+
+            tribbleCreamRect.Y += (int)tribbleCreamSpeed.Y;
+            if (tribbleCreamRect.Bottom > window.Height || tribbleCreamRect.Top < 0)
+            {
+                tribbleCreamSpeed.Y *= -1;
+                tribbleCoo.Play();
+            }
+
+            // // // // // //
+
+            tribbleOrangeRect.X += (int)tribbleOrangeSpeed.X;
+            if (tribbleOrangeRect.Right > window.Width || tribbleOrangeRect.Left < 0)
+            {
+                tribbleOrangeSpeed.X *= -1;
+                tribbleCoo.Play();
+            }
+
+            tribbleOrangeRect.Y += (int)tribbleOrangeSpeed.Y;
+            if (tribbleOrangeRect.Bottom > window.Height || tribbleOrangeRect.Top < 0)
+            {
+                tribbleOrangeSpeed.Y *= -1;
+                tribbleCoo.Play();
+            }
+
             base.Update(gameTime);
         }
 
@@ -86,6 +159,9 @@ namespace MonoGame3_animation
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(tribbleGreyTexture, tribbleGreyRect, Color.White);
+            _spriteBatch.Draw(tribbleBrownTexture, tribbleBrownRect, Color.White);
+            _spriteBatch.Draw(tribbleCreamTexture, tribbleCreamRect, Color.White);
+            _spriteBatch.Draw(tribbleOrangeTexture, tribbleOrangeRect, Color.White);
 
             _spriteBatch.End();
 
