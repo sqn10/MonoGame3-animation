@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace MonoGame3_animation
 {
@@ -30,6 +31,8 @@ namespace MonoGame3_animation
 
         SoundEffect tribbleCoo;
 
+        Texture2D discoTexture;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -43,23 +46,25 @@ namespace MonoGame3_animation
 
             this.Window.Title = "SQN";
 
+            Random generator = new Random();
+            int tribbleSize = generator.Next(80, 101);
 
             window = new Rectangle(0, 0, 800, 600);
             _graphics.PreferredBackBufferWidth = window.Width;
             _graphics.PreferredBackBufferHeight = window.Height;
             _graphics.ApplyChanges();
 
-            tribbleGreyRect = new Rectangle(300, 10, 100, 100);
-            tribbleGreySpeed = new Vector2(5, 5);
+            tribbleGreyRect = new Rectangle(generator.Next(0, 751), generator.Next(0, 451), tribbleSize, tribbleSize);
+            tribbleGreySpeed = new Vector2(generator.Next(1, 21), generator.Next(1, 21));
 
-            tribbleBrownRect = new Rectangle(10, 300, 100, 100);
-            tribbleBrownSpeed = new Vector2(10, 21);
+            tribbleBrownRect = new Rectangle(generator.Next(0, 751), generator.Next(0, 551), tribbleSize, tribbleSize);
+            tribbleBrownSpeed = new Vector2(generator.Next(1, 21), generator.Next(1, 11));
 
-            tribbleCreamRect = new Rectangle(131, 200, 100, 100);
-            tribbleCreamSpeed = new Vector2(6, 4);
+            tribbleCreamRect = new Rectangle(generator.Next(0, 751), generator.Next(0, 551), tribbleSize, tribbleSize);
+            tribbleCreamSpeed = new Vector2(generator.Next(1, 21), generator.Next(1, 11));
 
-            tribbleOrangeRect = new Rectangle(343, 452, 100, 100);
-            tribbleOrangeSpeed = new Vector2(3, 11);
+            tribbleOrangeRect = new Rectangle(generator.Next(0, 751), generator.Next(0, 551), tribbleSize, tribbleSize);
+            tribbleOrangeSpeed = new Vector2(generator.Next(1, 21), generator.Next(1, 11));
 
             base.Initialize();
         }
@@ -74,6 +79,8 @@ namespace MonoGame3_animation
             tribbleOrangeTexture = Content.Load<Texture2D>("tribbleOrange");
 
             tribbleCoo = Content.Load<SoundEffect>("tribble_coo");
+
+            discoTexture = Content.Load<Texture2D>("disco");
 
             // TODO: use this.Content to load your game content here
         }
@@ -157,6 +164,8 @@ namespace MonoGame3_animation
             // TODO: Add your drawing code here
 
             _spriteBatch.Begin();
+
+            _spriteBatch.Draw(discoTexture, window, Color.White);
 
             _spriteBatch.Draw(tribbleGreyTexture, tribbleGreyRect, Color.White);
             _spriteBatch.Draw(tribbleBrownTexture, tribbleBrownRect, Color.White);
